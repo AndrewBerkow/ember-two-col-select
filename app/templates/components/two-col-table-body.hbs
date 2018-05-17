@@ -1,0 +1,46 @@
+<div class="scroll-box">
+{{#if grouping}}
+  {{#each-in (group-by groupByColumn (sort-by groupByColumn  data)) as |groupName groupItems|}}
+    <tr><th class="two-col-select-grouped-heading">{{groupName}}</th></tr>
+    {{#each  (sort-by sortKey groupItems) as |item index|}}
+      <tr class="pointer full-width" >
+          {{two-col-cell
+            formName=twoColSelectLabels.formName
+            fieldName=twoColSelectLabels.fieldName
+            dbid=item.id
+            item=item
+            index=index
+            side=side
+            rowLabel=rowLabel
+            customData=customData
+            mouseDragData=mouseDragData
+          }}
+      </tr>
+    {{/each}}
+  {{/each-in}}
+  {{yield}}
+{{else}}
+  {{#each  (sort-by sortKey data) as |item index|}}
+    <tr class="{{leftColumnOption}} pointer full-width" >
+        {{two-col-cell
+          formName=twoColSelectLabels.formName
+          fieldName=twoColSelectLabels.fieldName
+          dbid=item.id
+          item=item
+          index=index
+          side=side
+          rowLabel=rowLabel
+          customData=customData
+          mouseDragData=mouseDragData
+        }}
+    </tr>
+  {{/each}}
+{{/if}}
+
+{{#if sideEmpty}}
+  <div class="no-results">
+    No results
+  </div>
+{{/if}}
+{{yield}}
+</div>

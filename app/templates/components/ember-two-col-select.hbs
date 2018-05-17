@@ -1,0 +1,84 @@
+{{yield}}
+<div id="{{if twoColSelectId twoColSelectId "twoColSelect"}}" class="two-col-select-wrapper noselect">
+
+  <div class="content-left-side">
+      <div class="content-table-label">
+        <label class="large-label">{{leftColumnTitle}}</label>
+      </div>
+      {{#single-col-select-wrapper mouseDragData=leftMouseDragData}}
+        <table class="table table-striped table-bordered table-hover two-column-select-container">
+            <thead class="left-col-header">
+
+            </thead>
+            <tbody>
+                  {{two-col-table-body
+                    data=filteredLeftTableData
+                    side="left"
+                    rowLabel=rowLabel
+                    grouping=grouping
+                    groupByColumn=groupByColumn
+                    optionClass="leftColumnOption"
+                    sortKey=sortKey
+                    twoColSelectLabels=twoColSelectLabels
+                    mouseDragData=leftMouseDragData
+                    customData=customData
+                    sideEmpty=leftSideEmpty
+                  }}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td class="py-1">
+                  <div class="two-col-select-results">(Showing {{currentLeftColResults}} of {{totalLeftColResults}} Results)</div>
+                </td>
+              </tr>
+            </tfoot>
+        </table>
+      {{/single-col-select-wrapper}}
+  </div>
+
+
+  <div class="content-center centered-text">
+    <button type="button" class="btn btn-default two-col-select-icon hidden-xs" {{action "move"}}><span class="fa fa-arrows-h fa-2x" aria-hidden="true"></span></button>
+
+    <button type="button" class="btn btn-default two-col-select-icon-vertical hidden-sm hidden-md hidden-lg" {{action "move"}}><span class="fa fa-arrows-v fa-2x" aria-hidden="true"></span></button>
+  </div>
+
+  <div class="content-right-side">
+      {{#if rightColumnTabData}}
+      <ul class="nav nav-tabs content-right-side-nav" role="tablist">
+        <li role="presentation"  class="active"><a href="#{{rightColumnTabData.idLabel}}_1" aria-controls="enroll" role="tab" data-toggle="tab">{{rightColumnTitle}}</a></li>
+        <li role="presentation"><a href="#{{rightColumnTabData.idLabel}}_2" aria-controls="instructors" role="tab" data-toggle="tab">{{rightColumnTabData.label}}</a></li>
+      </ul>
+      {{else}}
+        <div class="content-table-label">
+          <label class="large-label">{{rightColumnTitle}}</label>
+        </div>
+      {{/if}}
+      {{#single-col-select-wrapper mouseDragData=rightMouseDragData }}
+        <table class="table table-striped table-bordered table-hover two-column-select-container">
+            <thead>
+
+            </thead>
+            <tbody>
+                  {{two-col-table-body
+                    data=filteredRightTableData
+                    rowLabel=rowLabel
+                    grouping=grouping
+                    groupByColumn=groupByColumn
+                    side="right"
+                    sortKey=sortKey
+                    twoColSelectLabels=twoColSelectLabels
+                    mouseDragData=rightMouseDragData
+                    customData=customData
+                    sideEmpty=rightSideEmpty
+                  }}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td class="py-1"><div class="two-col-select-results">(Showing {{currentRightColResults}} of {{totalRightColResults}} Results)</div></td>
+              </tr>
+            </tfoot>
+        </table>
+      {{/single-col-select-wrapper}}
+  </div>
+</div>

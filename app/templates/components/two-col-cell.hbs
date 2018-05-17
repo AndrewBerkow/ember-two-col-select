@@ -1,0 +1,14 @@
+<div id="two-col-row-{{item.id}}-{{index}}" class="two-col-select-item {{side}}-item" data-uid={{item.id}} data-row="{{item.index}}" data-side="{{side}}">
+
+  <span class="two-col-cell-label" data-uid={{item.id}} data-row="{{item.index}}" data-side="{{side}}">
+     {{two-col-cell-checked-icon item=item side=side}}
+     {{get item rowLabel}}
+  </span>
+
+  <span class="two-col-cell-icon" data-uid={{item.id}} data-row="{{item.index}}" data-side="{{side}}">
+     {{#if item.icon}} <a href="#" data-toggle="tooltip" data-placement="auto right" title="{{item.icon.hoverText}}"><i class="fa {{item.icon.faIcon}}" aria-hidden="true"></i></a>{{/if}}
+  </span>
+
+</div>
+{{/if}}
+{{yield}}
