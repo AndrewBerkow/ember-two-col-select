@@ -75,13 +75,11 @@ export default Ember.Component.extend({
     },
     filteredLeftTableData: Ember.computed('leftTableData.list.length', 'leftTableData' ,function(){
       //apply any filter logic here
-
-      return this.get('leftTableData').getList();
+      return this.sortColumn(this.get('leftTableData').getList());
     }),
     filteredRightTableData: Ember.computed('rightTableData.list.length', 'rightTableData', function(){
       //apply any filter logic here
-
-     return this.get('rightTableData').getList();
+      return this.sortColumn(this.get('rightTableData').getList());
     }),
     currentLeftColResults: Ember.computed('filteredLeftTableData.length', function(){
       return this.get('filteredLeftTableData').toArray().length;
@@ -104,6 +102,20 @@ export default Ember.Component.extend({
 
     moveItems: function(ids, sourceSide, targetSide){
       this.sendAction('moveItems', ids, sourceSide, targetSide);
+    },
+
+    sortColumn: function(data){
+      //set index's to rows for drag select
+      if(this.get('grouping')){
+        data.sortBy(this.get('groupByColumn'), this.get('sortKey')).forEach(function(item, index) {
+          item.set('index', index);
+        });
+      }else{
+        data.sortBy(this.get('sortKey')).forEach(function(item, index) {
+          item.set('index', index);
+        });
+      }
+      return data;
     },
 
     actions: {
